@@ -114,11 +114,14 @@ ICON_AUDIO = '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"
 ICON_DL = '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>'
 
 # ───────────────────────── layout ─────────────────────────
-NAV = [('index.html', 'Início'), ('catalogo.html', 'Catálogo'), ('plano.html', 'Plano de leitura'), ('guia.html', 'Como usar'), ('sobre.html', 'Sobre e direitos')]
+NAV = [('./', 'Início'), ('catalogo.html', 'Catálogo'), ('plano.html', 'Plano de leitura'), ('guia.html', 'Como usar'), ('sobre.html', 'Sobre e direitos')]
 
 def page(fname, title, desc, body, extra_head=''):
-    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == fname else ""}>{t}</a>' for h, t in NAV)
+    nav = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == fname or (h == './' and fname == 'index.html') else ""}>{t}</a>' for h, t in NAV)
     canon = SITE + ('' if fname == 'index.html' else fname)
+    # A 404 é servida em qualquer caminho inexistente: base absoluta para os recursos, sem canonical e fora do índice.
+    seo = ('<base href="/biblioteca-italiana/">\n<meta name="robots" content="noindex">' if fname == '404.html'
+           else f'<link rel="canonical" href="{canon}">\n<meta property="og:url" content="{canon}">')
     full_title = title if fname == 'index.html' else f'{title} · Biblioteca Italiana'
     return f'''<!doctype html>
 <html lang="pt-BR">
@@ -127,12 +130,11 @@ def page(fname, title, desc, body, extra_head=''):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{canon}">
+{seo}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Biblioteca Italiana">
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(desc)}">
-<meta property="og:url" content="{canon}">
 <meta property="og:image" content="{SITE}assets/og.png">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
@@ -146,7 +148,7 @@ def page(fname, title, desc, body, extra_head=''):
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="34" height="34"><span>Biblioteca Italiana<small>leggere per imparare</small></span></a>
+<a class="brand" href="./"><img src="assets/favicon.svg" alt="" width="34" height="34"><span>Biblioteca Italiana<small>leggere per imparare</small></span></a>
 <nav class="nav" aria-label="Principal">{nav}</nav>
 </div></header>
 <main id="conteudo">
@@ -421,7 +423,7 @@ def p_guia():
 <details><summary>Encontrei um link quebrado ou um erro.</summary><p>Avise abrindo uma <a href="{REPO}/issues">issue no GitHub</a> (precisa de uma conta gratuita) ou pelo canal indicado no repositório.</p></details>
 <details><summary>Posso sugerir uma obra ou uma fonte?</summary><p>Sim, pelo mesmo caminho. Fontes novas só entram com licença clara.</p></details>
 </div>'''
-    return page('guia.html', 'Como usar a Biblioteca Italiana', 'Guia rápido: como usar o catálogo de leituras em italiano, ler no celular, usar a planilha de acompanhamento e perguntas frequentes.', body)
+    return page('guia.html', 'Como usar', 'Guia rápido: como usar o catálogo de leituras em italiano, ler no celular, usar a planilha de acompanhamento e perguntas frequentes.', body)
 
 def p_sobre():
     counts = {f: sum(1 for w in W if w['fonte'] == f) for f in sorted({w['fonte'] for w in W})}
@@ -465,7 +467,7 @@ def p_sobre():
 
 def p_404():
     return page('404.html', 'Página não encontrada', 'Página não encontrada.',
-                '<div class="wrap narrow"><h1>Pagina non trovata</h1><p>Essa página não existe. Que tal voltar ao <a href="index.html">início</a> ou ao <a href="catalogo.html">catálogo</a>?</p></div>')
+                '<div class="wrap narrow"><h1>Pagina non trovata</h1><p>Essa página não existe. Que tal voltar ao <a href="./">início</a> ou ao <a href="catalogo.html">catálogo</a>?</p></div>')
 
 # ───────────────────────── PDF do plano ─────────────────────────
 PDF_CSS = '''
