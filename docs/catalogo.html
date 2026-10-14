@@ -19,13 +19,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=58486e6b">
+<link rel="stylesheet" href="assets/style.css?v=c2ec0303">
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="site-header"><div class="wrap">
 <a class="brand" href="./"><img src="assets/favicon.svg" alt="" width="34" height="34"><span>Biblioteca Italiana<small>leggere per imparare</small></span></a>
-<nav class="nav" aria-label="Principal"><a href="./">Início</a><a href="catalogo.html" aria-current="page">Catálogo</a><a href="plano.html">Plano de leitura</a><a href="guia.html">Como usar</a><a href="sobre.html">Sobre e direitos</a></nav>
+<button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="menu" hidden>Menu</button>
+<nav class="nav" id="menu" aria-label="Principal"><a href="./">Início</a><a href="catalogo.html" aria-current="page">Catálogo</a><a href="plano.html">Plano de leitura</a><a href="guia.html">Como usar</a><a href="sobre.html">Sobre e direitos</a></nav>
 </div></header>
 <main id="conteudo">
 <div class="wrap"><h1>Catálogo</h1>
@@ -37,13 +38,15 @@
 <select id="fonte" aria-label="Fonte"><option value="">Todas as fontes</option><option>CLiGS</option><option>Learn Italian Online</option><option>Liber Liber</option><option>Project Gutenberg</option><option>Quick Italian</option><option>Wikisource</option></select>
 <select id="ordem" aria-label="Ordenar"><option value="sugerida">Ordem sugerida</option><option value="curtas">Mais curtas primeiro</option><option value="longas">Mais longas primeiro</option><option value="titulo">Título (A–Z)</option></select>
 </div>
+<button type="button" class="filters-toggle" id="filtros-botao" aria-expanded="true" aria-controls="filtros-mais" hidden>Mais filtros</button>
+<div class="filters-more" id="filtros-mais">
 <div class="chips" role="group" aria-label="Etapa"><button type="button" class="chip-btn c1" data-group="tappa" data-value="1" aria-pressed="false">1 · Primi passi</button><button type="button" class="chip-btn c2" data-group="tappa" data-value="2" aria-pressed="false">2 · Prendere il ritmo</button><button type="button" class="chip-btn c3" data-group="tappa" data-value="3" aria-pressed="false">3 · Il ponte</button><button type="button" class="chip-btn c4" data-group="tappa" data-value="4" aria-pressed="false">4 · Il sentiero</button><button type="button" class="chip-btn c5" data-group="tappa" data-value="5" aria-pressed="false">5 · Primi originali</button><button type="button" class="chip-btn c6" data-group="tappa" data-value="6" aria-pressed="false">6 · La grande letteratura</button><button type="button" class="chip-btn c7" data-group="tappa" data-value="7" aria-pressed="false">7 · I classici</button></div>
 <div class="chips" role="group" aria-label="Forma"><button type="button" class="chip-btn" data-group="forma" data-value="História graduada" aria-pressed="false">História graduada</button><button type="button" class="chip-btn" data-group="forma" data-value="Conto" aria-pressed="false">Conto</button><button type="button" class="chip-btn" data-group="forma" data-value="Contos (coletânea)" aria-pressed="false">Contos (coletânea)</button><button type="button" class="chip-btn" data-group="forma" data-value="Romance" aria-pressed="false">Romance</button><button type="button" class="chip-btn" data-group="forma" data-value="Poesia" aria-pressed="false">Poesia</button><button type="button" class="chip-btn" data-group="forma" data-value="Teatro" aria-pressed="false">Teatro</button><button type="button" class="chip-btn" data-group="forma" data-value="Prosa e ensaio" aria-pressed="false">Prosa e ensaio</button></div>
 <div class="toggles">
 <label><input type="checkbox" id="f-audio"> Com áudio</label>
 <label><input type="checkbox" id="f-pdf"> PDF para baixar aqui</label>
 <label>Minha lista: <select id="lista"><option value="">todas</option><option value="quero">quero ler</option><option value="lido">já li</option><option value="nao-lido">ainda não li</option></select></label>
-</div></div></div>
+</div></div></div></div>
 <div class="wrap">
 <div class="result-bar"><span id="count" aria-live="polite">222 obras</span>
 <span><button type="button" class="btn small ghost" id="sorteio">🎲 Sortear uma leitura</button> <button type="button" class="btn small ghost" id="limpar">Limpar filtros</button></span></div>
@@ -56,8 +59,8 @@
 <div><p><b>Biblioteca Italiana</b> · leituras em italiano, do A1 aos clássicos.</p>
 <p>Projeto pessoal e sem fins lucrativos, feito por um brasileiro que estuda italiano. Não é afiliado às fontes citadas.</p></div>
 <div><p><a href="https://github.com/oaleffemanuel/biblioteca-italiana">Código e dados no GitHub</a> · <a href="https://github.com/oaleffemanuel/biblioteca-italiana/issues">Avisar um problema</a></p>
-<p>Textos do projeto: CC BY 4.0 · Atualizado em 2026-10-12</p></div>
+<p>Textos do projeto: CC BY 4.0 · Atualizado em 2026-10-14</p></div>
 </div></footer>
-<script src="assets/app.js?v=58486e6b" defer></script>
+<script src="assets/app.js?v=c2ec0303" defer></script>
 </body>
 </html>
